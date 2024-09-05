@@ -28,14 +28,9 @@ namespace Demo01.Entities
         public bool IsSplitScreen { get; set; }
     }*/
 
-    internal class Game
+    internal class Game : Software
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public DateTime ReleaseDate { get; set; }
         public string PegiClassification { get; set; }
-        public bool IsOnline { get; set; }
         public bool IsSplitScreen { get; set; }
     }
 }

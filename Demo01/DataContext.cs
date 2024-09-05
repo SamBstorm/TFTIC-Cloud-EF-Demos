@@ -11,7 +11,7 @@ namespace Demo01
 {
     internal class DataContext : DbContext
     {
-        public DbSet<Game> Games { get; set; }
+        public DbSet<Software> Softs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -20,8 +20,10 @@ namespace Demo01
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new SoftwareConfig());
             modelBuilder.ApplyConfiguration(new GameConfig());
-                
+            modelBuilder.ApplyConfiguration(new ApplicationConfig());
+
         }
     }
 }
