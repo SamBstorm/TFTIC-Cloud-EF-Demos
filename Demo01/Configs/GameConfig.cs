@@ -29,9 +29,13 @@ namespace Demo01.Configs
                                             //la colonne représentant la propriété sélectionnée
                 .IsRequired();
 
+            builder.ToTable(t => t.HasCheckConstraint("CK_Game_Name", "LEN([Name]) > 0"));
+
             builder
                 .Property(nameof(Game.Description))
                 .HasMaxLength(1024);
+
+            builder.ToTable(t => t.HasCheckConstraint("CK_Game_Description", "LEN([Description]) > 10"));
 
             builder
                 .Property(nameof(Game.ReleaseDate))
