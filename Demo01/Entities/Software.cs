@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Demo01.Entities
 {
-    internal class Software
+    internal abstract class Software
     {
         public int Id { get; set; }
         public string Name { get; set; }
