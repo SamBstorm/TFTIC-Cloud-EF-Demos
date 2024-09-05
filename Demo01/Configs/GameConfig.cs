@@ -49,6 +49,11 @@ namespace Demo01.Configs
             builder
                 .Property(nameof(Game.IsOnline))
                 .IsRequired();
+
+            builder
+                .HasIndex(g => new { g.Name, g.ReleaseDate })   //Pour une clé composite,
+                                                                //utiliser un type anonyme
+                .IsUnique();                                    //Défini la/les colonne(s) comme étant Unique
         }
     }
 }
