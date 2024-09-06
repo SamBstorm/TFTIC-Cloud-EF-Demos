@@ -14,5 +14,8 @@ namespace Demo01.Entities
         public DateTime ReleaseDate { get; set; }
         public bool IsOnline { get; set; }
         public ServerDetails? ServerDetails { get; set; }
+
+        public int EditorId { get; set; }
+        public Editor Editor { get; set; }
     }
 }

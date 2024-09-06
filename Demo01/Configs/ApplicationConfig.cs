@@ -30,7 +30,8 @@ namespace Demo01.Configs
                     IsMobile = true,
                     IsMultimedia = false,
                     IsOnline = true,
-                    ReleaseDate = new DateTime(2012,9,12)
+                    ReleaseDate = new DateTime(2012,9,12),
+                    EditorId = 1
                 },
                 new Application()
                 {
@@ -40,7 +41,8 @@ namespace Demo01.Configs
                     IsMobile = true,
                     IsMultimedia = true,
                     IsOnline = true,
-                    ReleaseDate = new DateTime(2010, 10, 6)
+                    ReleaseDate = new DateTime(2010, 10, 6),
+                    EditorId = 7
                 },
                 new Application()
                 {
@@ -50,7 +52,8 @@ namespace Demo01.Configs
                     IsMobile = true,
                     IsMultimedia = true,
                     IsOnline = true,
-                    ReleaseDate = new DateTime(2006,5,14)
+                    ReleaseDate = new DateTime(2006,5,14),
+                    EditorId = 1
                 },
                 new Application()
                 {
@@ -60,9 +63,9 @@ namespace Demo01.Configs
                     IsMobile = false,
                     IsMultimedia = false,
                     IsOnline = true,
-                    ReleaseDate = new DateTime(1997,3,19)
-                }
-                );
+                    ReleaseDate = new DateTime(1997,3,19),
+                    EditorId = 6
+                });
         }
     }
 }

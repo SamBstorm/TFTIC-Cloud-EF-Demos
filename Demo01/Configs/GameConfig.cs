@@ -30,7 +30,8 @@ namespace Demo01.Configs
                     IsOnline = false,
                     IsSplitScreen = false,
                     PegiClassification = "NaN",
-                    ReleaseDate = new DateTime(2024,8,15)
+                    ReleaseDate = new DateTime(2024,8,15),
+                    EditorId = 1
                 },
                 new Game()
                 {
@@ -40,7 +41,8 @@ namespace Demo01.Configs
                     IsOnline = true,
                     IsSplitScreen = true,
                     PegiClassification = "+3",
-                    ReleaseDate= new DateTime(2020,7,1)
+                    ReleaseDate= new DateTime(2020,7,1),
+                    EditorId = 2
                 },
                 new Game()
                 {
@@ -50,7 +52,8 @@ namespace Demo01.Configs
                     IsOnline = true,
                     IsSplitScreen = false,
                     PegiClassification = "+18",
-                    ReleaseDate = new DateTime(2021,7,29)
+                    ReleaseDate = new DateTime(2021,7,29),
+                    EditorId = 5
                 },
                 new Game()
                 {
@@ -60,7 +63,8 @@ namespace Demo01.Configs
                     IsOnline = true,
                     IsSplitScreen = false,
                     PegiClassification = "+16",
-                    ReleaseDate = new DateTime(2017, 9, 6)
+                    ReleaseDate = new DateTime(2017, 9, 6),
+                    EditorId = 4
                 }
                 );
         }

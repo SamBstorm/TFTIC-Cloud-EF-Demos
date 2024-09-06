@@ -46,10 +46,11 @@ namespace Demo01
                             games = dataContext
                                 .Softs
                                 .OfType<Game>()
-                                .Include(g => g.ServerDetails);
+                                .Include(g => g.ServerDetails)
+                                .Include(g => g.Editor);
                             foreach (Game jeu in games)
                             {
-                                Console.Write($"{jeu.Id} | {jeu.Name} | {((jeu.Description.Length > 20) ? jeu.Description.Substring(0, 20) : jeu.Description)} | {jeu.PegiClassification}");
+                                Console.Write($"{jeu.Id} | {jeu.Name} | {jeu.Editor.Name} | {((jeu.Description.Length > 20) ? jeu.Description.Substring(0, 20) : jeu.Description)} | {jeu.PegiClassification}");
                                 if(jeu.ServerDetails is not null)
                                 {
                                     Console.Write($" | {jeu.ServerDetails.IpAddress}");
@@ -65,10 +66,11 @@ namespace Demo01
                             apps = dataContext
                                 .Softs
                                 .OfType<Application>()
-                                .Include(g => g.ServerDetails);
+                                .Include(a => a.ServerDetails)
+                                .Include(a => a.Editor);
                             foreach (Application app in apps)
                             {
-                                Console.Write($"{app.Id} | {app.Name} | {((app.Description.Length > 20) ? app.Description.Substring(0, 20) : app.Description)} | {((app.IsMobile) ? "Mobile" : "Desktop")}"); 
+                                Console.Write($"{app.Id} | {app.Name} | {app.Editor.Name} | {((app.Description.Length > 20) ? app.Description.Substring(0, 20) : app.Description)} | {((app.IsMobile) ? "Mobile" : "Desktop")}"); 
                                 if (app.ServerDetails is not null)
                                 {
                                     Console.Write($" | {app.ServerDetails.IpAddress}");

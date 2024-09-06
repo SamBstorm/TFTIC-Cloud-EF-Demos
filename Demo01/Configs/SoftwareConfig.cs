@@ -62,6 +62,16 @@ namespace Demo01.Configs
                 .HasValue<Application>(SoftwareType.app);       //S'il s'agit d'un object de type Application:
                                                                 //alors la valeur est "app"
 
+            builder
+                .Property(e => e.EditorId)
+                .HasDefaultValue(1)
+                .IsRequired();
+
+            builder
+                .HasOne(e => e.Editor)
+                .WithMany(e => e.Softwares)
+                .HasForeignKey(e => e.EditorId)
+                .HasConstraintName("FK_Software_Editor");
         }
     }
 }
