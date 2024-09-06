@@ -171,15 +171,19 @@ namespace Demo01
                         switch (Console.ReadKey(true).Key)
                         {
                             case ConsoleKey.NumPad3:
+                            case ConsoleKey.D3:
                                 jeu.PegiClassification = "+3";
                                 break;
                             case ConsoleKey.NumPad7:
+                            case ConsoleKey.D7:
                                 jeu.PegiClassification = "+7";
                                 break;
                             case ConsoleKey.NumPad6:
+                            case ConsoleKey.D6:
                                 jeu.PegiClassification = "+16";
                                 break;
                             case ConsoleKey.NumPad8:
+                            case ConsoleKey.D8:
                                 jeu.PegiClassification = "+18";
                                 break;
                             default:
@@ -220,15 +224,19 @@ namespace Demo01
                         switch (Console.ReadKey(true).Key)
                         {
                             case ConsoleKey.NumPad3:
+                            case ConsoleKey.D3:
                                 jeu.PegiClassification = "+3";
                                 break;
                             case ConsoleKey.NumPad7:
+                            case ConsoleKey.D7:
                                 jeu.PegiClassification = "+7";
                                 break;
                             case ConsoleKey.NumPad6:
+                            case ConsoleKey.D6:
                                 jeu.PegiClassification = "+16";
                                 break;
                             case ConsoleKey.NumPad8:
+                            case ConsoleKey.D8:
                                 jeu.PegiClassification = "+18";
                                 break;
                             default:
