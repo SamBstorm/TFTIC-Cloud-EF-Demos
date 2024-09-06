@@ -12,7 +12,7 @@ namespace Demo01
                 Console.Clear();
                 Console.WriteLine("Bienvenue dans le gestionnaire d'application");
                 Console.WriteLine("Que souhaitez-vous faire ?");
-                Console.WriteLine("(C)onsulter - (A)jouter - (Q)uitter"); 
+                Console.WriteLine("(C)onsulter - (A)jouter - (Q)uitter");
                 key = Console.ReadKey(true).Key;
                 switch (key)
                 {
@@ -45,7 +45,7 @@ namespace Demo01
                             games = dataContext.Softs.OfType<Game>();
                             foreach (Game jeu in games)
                             {
-                                Console.WriteLine($"{jeu.Id} | {jeu.Name} | {((jeu.Description.Length > 20)?jeu.Description.Substring(0,20) : jeu.Description)} | {jeu.PegiClassification}");
+                                Console.WriteLine($"{jeu.Id} | {jeu.Name} | {((jeu.Description.Length > 20) ? jeu.Description.Substring(0, 20) : jeu.Description)} | {jeu.PegiClassification}");
                             }
                         }
                         break;
@@ -56,34 +56,126 @@ namespace Demo01
                             apps = dataContext.Softs.OfType<Application>();
                             foreach (Application app in apps)
                             {
-                                Console.WriteLine($"{app.Id} | {app.Name} | {((app.Description.Length > 20) ? app.Description.Substring(0, 20) : app.Description)} | {((app.IsMobile)?"Mobile" : "Desktop")}");
+                                Console.WriteLine($"{app.Id} | {app.Name} | {((app.Description.Length > 20) ? app.Description.Substring(0, 20) : app.Description)} | {((app.IsMobile) ? "Mobile" : "Desktop")}");
                             }
                         }
                         break;
                     case ConsoleKey.I:
                         Software? software;
                         Console.WriteLine("Quel identifiant voulez-vous consulter ?");
-                        int id = int.Parse( Console.ReadLine() );
+                        int id = int.Parse(Console.ReadLine());
                         using (DataContext dataContext = new DataContext())
                         {
                             software = dataContext.Softs.SingleOrDefault(s => s.Id == id);
-                        }
-                        switch (software)
-                        {
-                            case Game jeu:
-                                Console.WriteLine($"{jeu.Id} | {jeu.Name} | {((jeu.Description.Length > 20) ? jeu.Description.Substring(0, 20) : jeu.Description)} | {jeu.PegiClassification}");
-                                break;
-                            case Application app:
-                                Console.WriteLine($"{app.Id} | {app.Name} | {((app.Description.Length > 20) ? app.Description.Substring(0, 20) : app.Description)} | {((app.IsMobile) ? "Mobile" : "Desktop")}");
-                                break;
-                            case null:
-                                Console.WriteLine($"Aucune correspondance pour l'id {id}...");
-                                break;
+                            switch (software)
+                            {
+                                case Game jeu:
+                                    Console.WriteLine($"{jeu.Id} | {jeu.Name} | {((jeu.Description.Length > 20) ? jeu.Description.Substring(0, 20) : jeu.Description)} | {jeu.PegiClassification}");
+                                    Console.WriteLine("Voulez-vous mettre à jour le jeu?");
+                                    Console.WriteLine("(O)ui - (N)on");
+                                    if (Console.ReadKey(true).Key == ConsoleKey.O)
+                                    {
+                                        UpdateGame(jeu);
+                                        dataContext.SaveChanges();
+                                    }
+                                    break;
+                                case Application app:
+                                    Console.WriteLine($"{app.Id} | {app.Name} | {((app.Description.Length > 20) ? app.Description.Substring(0, 20) : app.Description)} | {((app.IsMobile) ? "Mobile" : "Desktop")}");
+                                    Console.WriteLine("Voulez-vous mettre à jour l'application?");
+                                    Console.WriteLine("(O)ui - (N)on");
+                                    if (Console.ReadKey(true).Key == ConsoleKey.O)
+                                    {
+                                        UpdateApp(app);
+                                        dataContext.SaveChanges();
+                                    }
+                                    break;
+                                case null:
+                                    Console.WriteLine($"Aucune correspondance pour l'id {id}...");
+                                    break;
+                            }
                         }
                         break;
                 }
                 Console.WriteLine("Appuyez sur une touche pour continuer...");
                 Console.ReadKey(true);
+            } while (key != ConsoleKey.R);
+        }
+
+        private static void UpdateApp(Application app)
+        {
+            ConsoleKey key;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Que voulez-vous mettre à jour ?");
+                Console.WriteLine($"(N)om : {app.Name}");
+                Console.WriteLine($"(D)escription : {app.Description}");
+                Console.WriteLine($"Est-ce (M)obile : {app.IsMobile}");
+                Console.WriteLine($"(R)evenir en arrière");
+                key = Console.ReadKey(true).Key;
+                switch (key)
+                {
+                    case ConsoleKey.N:
+                        Console.WriteLine("Veuillez indiquer le nouveau nom :");
+                        app.Name = Console.ReadLine();
+                        break;
+                    case ConsoleKey.D:
+                        Console.WriteLine("Veuillez indiquer la nouvelle description :");
+                        app.Description = Console.ReadLine();
+                        break;
+                    case ConsoleKey.M:
+                        Console.WriteLine("Changement du mode mobile");
+                        app.IsMobile = !app.IsMobile;
+                        break;
+                }
+            } while (key != ConsoleKey.R);
+        }
+
+        private static void UpdateGame(Game jeu)
+        {
+            ConsoleKey key;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Que voulez-vous mettre à jour ?");
+                Console.WriteLine($"(N)om : {jeu.Name}");
+                Console.WriteLine($"(D)escription : {jeu.Description}");
+                Console.WriteLine($"Classification (P)egi : {jeu.PegiClassification}");
+                Console.WriteLine($"(R)evenir en arrière");
+                key = Console.ReadKey(true).Key;
+                switch (key)
+                {
+                    case ConsoleKey.N:
+                        Console.WriteLine("Veuillez indiquer le nouveau nom :");
+                        jeu.Name = Console.ReadLine();
+                        break;
+                    case ConsoleKey.D:
+                        Console.WriteLine("Veuillez indiquer la nouvelle description :");
+                        jeu.Description = Console.ReadLine();
+                        break;
+                    case ConsoleKey.P:
+                        Console.WriteLine("Veuillez indiquer la nouvelle classification Pegi :");
+                        Console.WriteLine("(3) ans ou plus - (7) ans ou plus - 1(6) ans ou plus - 1(8) ans ou plus - (N)on défini");
+                        switch (Console.ReadKey(true).Key)
+                        {
+                            case ConsoleKey.NumPad3:
+                                jeu.PegiClassification = "+3";
+                                break;
+                            case ConsoleKey.NumPad7:
+                                jeu.PegiClassification = "+7";
+                                break;
+                            case ConsoleKey.NumPad6:
+                                jeu.PegiClassification = "+16";
+                                break;
+                            case ConsoleKey.NumPad8:
+                                jeu.PegiClassification = "+18";
+                                break;
+                            default:
+                                jeu.PegiClassification = "NaN";
+                                break;
+                        }
+                        break;
+                }
             } while (key != ConsoleKey.R);
         }
 
@@ -94,10 +186,11 @@ namespace Demo01
             {
                 Console.Clear();
                 Console.WriteLine("Que voulez-vous ajouter ?");
-                Console.WriteLine("(J)eu - (A)pplication - (R)evenir en arrière"); 
+                Console.WriteLine("(J)eu - (A)pplication - (R)evenir en arrière");
                 key = Console.ReadKey(true).Key;
                 int year, month, day;
-                switch (key) {
+                switch (key)
+                {
                     case ConsoleKey.J:
                         Game jeu = new Game();
                         Console.WriteLine("Quel est le nom du jeu :");
@@ -140,7 +233,7 @@ namespace Demo01
                         jeu.ReleaseDate = new DateTime(year, month, day);
 
                         //Appel de la base de donnée pour sauvegarder notre jeu
-                        using(DataContext dataContext = new DataContext())
+                        using (DataContext dataContext = new DataContext())
                         {
                             dataContext.Softs.Add(jeu);
                             dataContext.SaveChanges();
