@@ -26,6 +26,8 @@ namespace Demo01
             modelBuilder.ApplyConfiguration(new ApplicationConfig());
             modelBuilder.ApplyConfiguration(new ServerDetailsConfig());
             modelBuilder.ApplyConfiguration(new EditorConfig());
+            modelBuilder.ApplyConfiguration(new PlatformConfig());
+            modelBuilder.ApplyConfiguration(new PlatformGameConfig());
 
         }
     }

@@ -32,5 +32,7 @@ namespace Demo01.Entities
     {
         public string PegiClassification { get; set; }
         public bool IsSplitScreen { get; set; }
+        //public List<Platform> Platforms { get; set; }
+        public List<PlatformGame> PlatformGames { get;set; }
     }
 }
