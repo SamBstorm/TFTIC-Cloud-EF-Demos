@@ -13,5 +13,6 @@ namespace Demo01.Entities
         public string Description { get; set; }
         public DateTime ReleaseDate { get; set; }
         public bool IsOnline { get; set; }
+        public ServerDetails? ServerDetails { get; set; }
     }
 }

@@ -12,6 +12,7 @@ namespace Demo01
     internal class DataContext : DbContext
     {
         public DbSet<Software> Softs { get; set; }
+        public DbSet<ServerDetails> ServerDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -23,6 +24,7 @@ namespace Demo01
             modelBuilder.ApplyConfiguration(new SoftwareConfig());
             modelBuilder.ApplyConfiguration(new GameConfig());
             modelBuilder.ApplyConfiguration(new ApplicationConfig());
+            modelBuilder.ApplyConfiguration(new ServerDetailsConfig());
 
         }
     }
