@@ -1,4 +1,5 @@
 ﻿using Demo01.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Demo01
 {
@@ -42,10 +43,18 @@ namespace Demo01
                         IEnumerable<Game> games;
                         using (DataContext dataContext = new DataContext())
                         {
-                            games = dataContext.Softs.OfType<Game>();
+                            games = dataContext
+                                .Softs
+                                .OfType<Game>()
+                                .Include(g => g.ServerDetails);
                             foreach (Game jeu in games)
                             {
-                                Console.WriteLine($"{jeu.Id} | {jeu.Name} | {((jeu.Description.Length > 20) ? jeu.Description.Substring(0, 20) : jeu.Description)} | {jeu.PegiClassification}");
+                                Console.Write($"{jeu.Id} | {jeu.Name} | {((jeu.Description.Length > 20) ? jeu.Description.Substring(0, 20) : jeu.Description)} | {jeu.PegiClassification}");
+                                if(jeu.ServerDetails is not null)
+                                {
+                                    Console.Write($" | {jeu.ServerDetails.IpAddress}");
+                                }
+                                Console.WriteLine();
                             }
                         }
                         break;
@@ -53,10 +62,18 @@ namespace Demo01
                         IEnumerable<Application> apps;
                         using (DataContext dataContext = new DataContext())
                         {
-                            apps = dataContext.Softs.OfType<Application>();
+                            apps = dataContext
+                                .Softs
+                                .OfType<Application>()
+                                .Include(g => g.ServerDetails);
                             foreach (Application app in apps)
                             {
-                                Console.WriteLine($"{app.Id} | {app.Name} | {((app.Description.Length > 20) ? app.Description.Substring(0, 20) : app.Description)} | {((app.IsMobile) ? "Mobile" : "Desktop")}");
+                                Console.Write($"{app.Id} | {app.Name} | {((app.Description.Length > 20) ? app.Description.Substring(0, 20) : app.Description)} | {((app.IsMobile) ? "Mobile" : "Desktop")}"); 
+                                if (app.ServerDetails is not null)
+                                {
+                                    Console.Write($" | {app.ServerDetails.IpAddress}");
+                                }
+                                Console.WriteLine();
                             }
                         }
                         break;
