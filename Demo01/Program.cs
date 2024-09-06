@@ -71,22 +71,34 @@ namespace Demo01
                             {
                                 case Game jeu:
                                     Console.WriteLine($"{jeu.Id} | {jeu.Name} | {((jeu.Description.Length > 20) ? jeu.Description.Substring(0, 20) : jeu.Description)} | {jeu.PegiClassification}");
-                                    Console.WriteLine("Voulez-vous mettre à jour le jeu?");
-                                    Console.WriteLine("(O)ui - (N)on");
-                                    if (Console.ReadKey(true).Key == ConsoleKey.O)
+                                    Console.WriteLine("Que voulez-vous faire ?");
+                                    Console.WriteLine("(M)ettre à jour - (S)upprimer - (R)evenir en arrière");
+                                    switch(Console.ReadKey(true).Key)
                                     {
-                                        UpdateGame(jeu);
-                                        dataContext.SaveChanges();
+                                        case ConsoleKey.M:
+                                            UpdateGame(jeu);
+                                            dataContext.SaveChanges();
+                                            break;
+                                        case ConsoleKey.S:
+                                            dataContext.Remove(jeu);
+                                            dataContext.SaveChanges();
+                                            break;
                                     }
                                     break;
                                 case Application app:
                                     Console.WriteLine($"{app.Id} | {app.Name} | {((app.Description.Length > 20) ? app.Description.Substring(0, 20) : app.Description)} | {((app.IsMobile) ? "Mobile" : "Desktop")}");
-                                    Console.WriteLine("Voulez-vous mettre à jour l'application?");
-                                    Console.WriteLine("(O)ui - (N)on");
-                                    if (Console.ReadKey(true).Key == ConsoleKey.O)
+                                    Console.WriteLine("Que voulez-vous faire ?");
+                                    Console.WriteLine("(M)ettre à jour - (S)upprimer - (R)evenir en arrière");
+                                    switch (Console.ReadKey(true).Key)
                                     {
-                                        UpdateApp(app);
-                                        dataContext.SaveChanges();
+                                        case ConsoleKey.M:
+                                            UpdateApp(app);
+                                            dataContext.SaveChanges();
+                                            break;
+                                        case ConsoleKey.S:
+                                            dataContext.Remove(app);
+                                            dataContext.SaveChanges();
+                                            break;
                                     }
                                     break;
                                 case null:
